@@ -28,12 +28,24 @@ export class Gameboard {
       this.board[positionLetter][positionNumber] = ship;
      });
   }
-     
-    
-     
-    
-     
+
     this.ships.push(ship);
   }
 
+  receiveAttack(letter, number) {
+    if (row < 0 || row > 9 || col < 0 || col > 9) {
+      throw new Error("Attack out of bounds");
+    }
+    const target = this.board[letter][number];
+    if(target instanceof Ship) {
+        target.hit();
+        this.board[letter][number] = 'hit';
+        return true;
+    }
+    else{
+        this.missed.push([[letter], [number]]);
+        this.board[letter][number] = 'miss';
+        return false;
+    }
+  }
 }
