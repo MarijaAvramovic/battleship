@@ -33,7 +33,7 @@ export class Gameboard {
   }
 
   receiveAttack(letter, number) {
-    if (row < 0 || row > 9 || col < 0 || col > 9) {
+    if (letter < 0 || letter > 9 || number < 0 || number > 9) {
       throw new Error("Attack out of bounds");
     }
     const target = this.board[letter][number];
@@ -43,9 +43,13 @@ export class Gameboard {
         return true;
     }
     else{
-        this.missed.push([[letter], [number]]);
+        this.missed.push({ letter, number });
         this.board[letter][number] = 'miss';
         return false;
     }
+  }
+
+  allShipsSunk() {
+    return this.ships.every(ship => ship.isSunk());
   }
 }

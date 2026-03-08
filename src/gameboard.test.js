@@ -25,3 +25,13 @@ test('position ship is added', () => {
     expect(gb.ships).toHaveLength(1);
   
 });
+
+test('receiveAttack', () => {
+  const gb = new Gameboard();
+
+  const rezultat = gb.receiveAttack(7, 2);
+
+  expect(rezultat).toBe(false);
+  expect(gb.board[7][2]).toBe('miss');
+  expect(gb.missed).toEqual([{ letter: 7, number: 2 }]);
+});
