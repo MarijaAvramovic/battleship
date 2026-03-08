@@ -35,3 +35,15 @@ test('receiveAttack', () => {
   expect(gb.board[7][2]).toBe('miss');
   expect(gb.missed).toEqual([{ letter: 7, number: 2 }]);
 });
+
+ 
+
+  test('is game on?', () => {
+  const gb = new Gameboard();
+  gb.placeShip(2, 4, 1, 'vertical');
+
+  const game = gb.allShipsSunk();
+
+  expect(game).toBe(false);
+ 
+  });
