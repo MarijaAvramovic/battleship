@@ -16,3 +16,12 @@ test('Gameboard hips and missed is empty', () => {
     expect(gb.ships).toHaveLength(0);
      expect(gb.missed).toHaveLength(0);
 });
+
+test('position ship is added', () => {
+    const gb = new Gameboard();
+      gb.placeShip(2, 4, 1, 'vertical');
+     
+ 
+    expect(gb.ships).toHaveLength(1);
+  
+});
