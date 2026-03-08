@@ -10,3 +10,7 @@ Using tests.
 Gameboards is  able to place ships at specific coordinates by calling the ship factory or class.
 Gameboard class has a receiveAttack function that takes a pair of coordinates, determines whether or not the attack hit a ship and then sends the ‘hit’ function to the correct ship, or records the coordinates of the missed shot as obj so it can be displayed  properly.
 Gameboard can call isSunkAll to report whether or not all of its ships have been sunk.
+
+I have a Player class/factory.
+Made for two types of players in the game, ‘real’ players and ‘computer’ players.
+Each player object can contain its own gameboard.
