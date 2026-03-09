@@ -5,32 +5,33 @@ export class Gameboard {
   board = Array(10).fill().map(() => Array(10).fill(null));
   ships = [];
   missed = [];
+ 
+    
+placeShip(length, letter, number, direction = 'horizontal') {
+  
+  const ship = new Ship(length);
+  const positions = [];   
 
+  for (let i = 0; i < length; i++) {
+    const row = direction === 'horizontal' ? letter : letter + i;
+    const col = direction === 'horizontal' ? number + i : number;
 
-  placeShip(length, letter, number, direction = 'horizontal'){
-    const ship = new Ship(length);
-
-    const shipsPosition = [];
-
-    for (let i = 0; i < length; i++) {
-        const positionLetter = direction == 'horizontal' ? letter : letter + i;
-        const positionNumber = direction == 'horizontal' ? number + i : number;
-        if (positionNumber < 0 || positionNumber > 9 || positionLetter < 0 || positionLetter > 9) {
-        throw new Error("ship out of board limit")
+    if (row < 0 || row > 9 || col < 0 || col > 9) {
+      throw new Error("Ship out of board limits");
     }
-    if (this.board[positionLetter][positionNumber] !== null) {
-        throw new Error("Ships overlap");
-      }
-      
-      shipsPosition.push([positionLetter, positionNumber]);
+    if (this.board[row][col] !== null) {
+      throw new Error("Ships overlap");
+    }
 
-       shipsPosition.forEach(([positionLetter, positionNumber]) => {
-      this.board[positionLetter][positionNumber] = ship;
-     });
+    positions.push([row, col]);
   }
+ 
+  positions.forEach(([row, col]) => {
+    this.board[row][col] = ship;
+  });
 
-    this.ships.push(ship);
-  }
+  this.ships.push(ship);
+}
 
   receiveAttack(letter, number) {
     if (letter < 0 || letter > 9 || number < 0 || number > 9) {
@@ -50,6 +51,7 @@ export class Gameboard {
   }
 
   allShipsSunk() {
+    if (this.ships.length === 0) return false;
     return this.ships.every(ship => ship.isSunk());
   }
 
